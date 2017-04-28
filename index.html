@@ -200,11 +200,11 @@ class MineSweeper {
                     unsafeNew++;
                 }
                 if(j==5){
-                    return Fail();
+                    return this.Fail();
                 }
             }
         }
-        if(!safeFlagged && !unsafeNew)Win();
+        if(!safeFlagged && !unsafeNew)this.Win();
     }
     Fail(){
         this.Handle=()=>{};
