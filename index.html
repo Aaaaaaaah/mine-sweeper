@@ -13,7 +13,7 @@ var protoSquare = Object.create(HTMLElement.prototype,
     }
 );
 
-var subSquare = document.registerElement('sub-square');
+var subSquare = document.registerElement('sub-square', {prototype: protoSquare});
 
 
         </script>
