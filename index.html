@@ -97,14 +97,6 @@ class MineSweeper {
             this.data[h][w]=0;
         }
     }
-    /* State Table
-     * 0 unsafe new
-     * 1 safe new
-     * 2 safe flaged
-     * 3 unsafe flaged
-     * 4 safe found
-     * 5 unsafe found
-     */
     Handle(e,o){
         e.preventDefault();
         var i = e.target.i;
@@ -152,14 +144,6 @@ class MineSweeper {
         }
         this.CheckWinOrFail();
     }
-    /* State Table
-     * 0 unsafe new
-     * 1 safe new
-     * 2 safe flaged
-     * 3 unsafe flaged
-     * 4 safe found
-     * 5 unsafe found
-     */
     Flood(i,j){
         if(this.data[i][j]==2)return;
         var count = 0;
