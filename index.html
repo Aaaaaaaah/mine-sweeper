@@ -54,6 +54,7 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
 
 class MineSweeper {
     constructor(name,element,w=10,h=10,m=Math.sqrt(w*h)){
+        this.debug = 0;
         this.name = name;
         this.element = element;
         this.w = w;
