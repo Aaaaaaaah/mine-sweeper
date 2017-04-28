@@ -1,1 +1,1 @@
-# mine-sweeper
+# Mine Sweeper[Mine Sweeper](https://aaaaaaaah.github.io/mine-sweeper/)
