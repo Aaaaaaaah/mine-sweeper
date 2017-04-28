@@ -75,8 +75,8 @@ class MineSweeper {
                 temp.id = `sub-${i}-${j}`;
                 temp.i = i;
                 temp.j = j;
-                temp.addEventListener("click",this.Handle)
-                temp.addEventListener("contextmenu",this.Handle)
+                temp.addEventListener("click",(e,o)=>this.Handle(e,o))
+                    temp.addEventListener("contextmenu",(e,o)=>this.Handle(e,o))
                 this.element.appendChild(temp);
             }
             this.element.appendChild(document.createElement("br"))
@@ -102,14 +102,16 @@ class MineSweeper {
     Handle(e,o){
         var i = e.target.i;
         var j = e.target.j;
+        var t = e.target;
         if(e.type=="click"){
             /* left click */
             switch(this.data[i][j]){
                 case(0):
                     //going to die
                     break;
-                case(1);
+                case(1):
                     //open it
+                    this.Flood(i,j);
                     break;
                 case(2):
                     break;
@@ -121,18 +123,30 @@ class MineSweeper {
             switch(this.data[i][j]){
                 case(0):
                     //flag it
+                    this.data[i][j]=3;
+                    t.setAttribute("square-type","F");
                     break;
                 case(1):
                     //flag it
+                    this.data[i][j]=2;
+                    t.setAttribute("square-type","F");
                     break;
                 case(2):
                     //cancel flag
+                    this.data[i][j]=1;
+                    t.setAttribuite("square-type","I");
                     break;
                 case(3):
                     //cancel flag
+                    this.data[i][j]=0;
+                    t.setAttribuite("square-type","I");
                     break;
             }
         }
+        e.preventDefault();
+    }
+    Flood(i,j){
+        document.getElementById(`sub-${i}-${j}`).setAttribute("square-type","S");
     }
 };
 
