@@ -147,6 +147,7 @@ class MineSweeper {
                     break;
             }
         }
+        this.CheckWinOrFail();
         e.preventDefault();
     }
     /* State Table
@@ -184,6 +185,30 @@ class MineSweeper {
             this.data[i][j] = 4;
             this.pool[i][j].setAttribute("square-type",count);
         }
+    }
+    CheckWinOrFail(){
+        var safeFlagged = 0;
+        var unsafeNew = 0;
+        for(var i of this.data){
+            for(var j of this.data){
+                if(j==2){
+                    safeFlagged++;
+                }
+                if(j==0){
+                    unsafeNew++;
+                }
+                if(j==5){
+                    return Fail();
+                }
+            }
+        }
+        if(!safeFlagged && !unsafeNew)Win();
+    }
+    Fail(){
+        alert("Fail")
+    }
+    Win(){
+        alert("win")
     }
 };
 
