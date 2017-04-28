@@ -52,7 +52,18 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
     };
 });
 
-
+class MineSweeper {
+    constructor(element){
+        for(var j=0;j<10;j++){
+            for(var i=0;i<10;i++){
+                var temp = new subSquare();
+                temp.id = `sub-${j}-${i}`;
+                element.appendChild(temp);
+            }
+            element.appendChild(document.createElement("br"))
+        }
+    }
+};
 
         </script>
     </head>
@@ -92,17 +103,12 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
         </template>
 
         <main-div>
-            <content-div>
-                <script>
-for(var j=0;j<10;j++){
-    for(var i=0;i<10;i++){
-        document.write(`<sub-square id='sub-${j}-${i}'></sub-square>`);
-    }
-    document.write("<br></br>")
-}
-                </script>
+            <content-div id="contentDiv">
             </content-div>
         </main-div>
 
+        <script>
+var game = new MineSweeper(document.getElementById('contentDiv'));
+        </script>
     </body>
 </html>
