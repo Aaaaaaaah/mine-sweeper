@@ -54,6 +54,7 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
 
 class MineSweeper {
     constructor(name,element,w=10,h=10,m=Math.sqrt(w*h)){
+        this.debug = 0;
         this.name = name;
         this.element = element;
         this.w = w;
@@ -106,6 +107,7 @@ class MineSweeper {
      * 5 unsafe found
      */
     Handle(e,o){
+        e.preventDefault();
         var i = e.target.i;
         var j = e.target.j;
         var t = e.target;
@@ -150,7 +152,6 @@ class MineSweeper {
             }
         }
         this.CheckWinOrFail();
-        e.preventDefault();
     }
     /* State Table
      * 0 unsafe new
@@ -191,25 +192,33 @@ class MineSweeper {
     CheckWinOrFail(){
         var safeFlagged = 0;
         var unsafeNew = 0;
+        var safeNew = 0;
         for(var i of this.data){
-            for(var j of this.data){
+            for(var j of i){
                 if(j==2){
                     safeFlagged++;
                 }
                 if(j==0){
                     unsafeNew++;
                 }
+                if(j==1){
+                    safeNew++;
+                }
                 if(j==5){
-                    return Fail();
+                    return this.Fail();
                 }
             }
         }
-        if(!safeFlagged && !unsafeNew)Win();
+        if((safeFlagged==0 && unsafeNew==0)||(safeNew==0 && safeFlagged==0)){
+            this.Win();
+        }
     }
     Fail(){
-        alert("Fail")
+        this.Handle=()=>{};
+        alert("Fail");
     }
     Win(){
+        this.Handle=()=>{};
         alert("win")
     }
 };
