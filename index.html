@@ -114,7 +114,9 @@ class MineSweeper {
             switch(this.data[i][j]){
                 case(0):
                     //going to die
-                    this.data[i][j]=5;
+                    if(!this.debug){
+                        this.data[i][j]=5;
+                    }
                     t.setAttribute("square-type","D")
                     break;
                 case(1):
@@ -294,6 +296,7 @@ class MineSweeper {
 
         <script>
 var game = new MineSweeper("game",document.getElementById('contentDiv'));
+game.debug = 1
         </script>
     </body>
 </html>
