@@ -53,16 +53,85 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
 });
 
 class MineSweeper {
-    constructor(element,w=10,h=10){
+    constructor(element,w=10,h=10,m=Math.sqrt(w*h)){
+        this.element = element;
         this.w = w;
         this.h = h;
+        this.m = m;
+        this.data = [];
+        for(var i=0;i<this.h;i++){
+            this.data.push([])
+            for(var j=0;j<this.w;j++){
+                this.data[i].push(1)
+            }
+        }
+        this.initDom();
+        this.initMap();
+    }
+    initDom(){
         for(var i=0;i<this.h;i++){
             for(var j=0;j<this.w;j++){
                 var temp = new subSquare();
                 temp.id = `sub-${i}-${j}`;
-                element.appendChild(temp);
+                temp.i = i;
+                temp.j = j;
+                temp.addEventListener("click",this.Handle)
+                temp.addEventListener("contextmenu",this.Handle)
+                this.element.appendChild(temp);
             }
-            element.appendChild(document.createElement("br"))
+            this.element.appendChild(document.createElement("br"))
+        }
+    }
+    initMap(){
+        for(var n=0;n<this.m;n++){
+            var h=Math.floor(Math.random() * this.h)
+            var w=Math.floor(Math.random() * this.w);
+            if(!this.data[h][w]){
+                n--;
+                continue;
+            }
+            this.data[h][w]=0;
+        }
+    }
+    /* State Table
+     * 0 unsafe unflaged
+     * 1 safe unflaged
+     * 2 safe flaged
+     * 3 unsafe flaged
+     */
+    Handle(e,o){
+        var i = e.target.i;
+        var j = e.target.j;
+        if(e.type=="click"){
+            /* left click */
+            switch(this.data[i][j]){
+                case(0):
+                    //going to die
+                    break;
+                case(1);
+                    //open it
+                    break;
+                case(2):
+                    break;
+                case(3):
+                    break;
+            }
+        }else{
+            /* right click */
+            switch(this.data[i][j]){
+                case(0):
+                    //flag it
+                    break;
+                case(1):
+                    //flag it
+                    break;
+                case(2):
+                    //cancel flag
+                    break;
+                case(3):
+                    //cancel flag
+                    break;
+            }
         }
     }
 };
