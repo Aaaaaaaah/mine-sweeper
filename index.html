@@ -7,30 +7,47 @@ var contentDiv = document.registerElement('content-div');
 var subSquare = document.registerElement('sub-square', class extends HTMLElement {
     //createdCallback() {};
     attachedCallback() {
-        this.squareType = "I";
         this.shadow = this.createShadowRoot();
-        this.shadow.innerHTML = "test";
+        this.setAttribute("square-type","I");
     };
     //detachedCallback() {};
     attributeChangedCallback(attr, oldVal, newVal) {
-        if(attr=="squareType"){
+        if(attr=="square-type"){
+            this.shadow.innerHTML = "";
+            var squareType = "";
+            this.innerHTML = newVal;
             switch(newVal){
                 case "I":
+                    squareType="sub-init";
                     break;
                 case "F":
+                    squareType="sub-flag";
                     break;
                 case "S":
+                    squareType="sub-safe";
                     break;
                 case "D":
+                    squareType="sub-dead";
                     break;
                 case "W":
+                    squareType="sub-wrong";
                     break;
                 case "R":
+                    squareType="sub-right";
                     break;
                 case "U":
+                    squareType="sub-unfound";
                     break;
                 default:
+                    squareType="sub-others";
            };
+           this.shadow.appendChild(
+               document.importNode(
+                   document.getElementById(squareType).content,
+                   true
+               )
+           );
+
         };
     };
 });
@@ -41,28 +58,35 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
 
         <!-- squareType="I(nit),F(lag),S(afe),D(ead),W(rong),R(ight),U(nfound),1,2,3,4..." -->
         <template id="sub-init">
-            <div type=""> lalala </div>
+            <div> init </div>
         </template>
 
         <template id="sub-flag">
+            <div> flag </div>
         </template>
 
         <template id="sub-safe">
+            <div> safe </div>
         </template>
 
         <template id="sub-dead">
+            <div> dead </div>
         </template>
 
         <template id="sub-wrong">
+            <div> wrong </div>
         </template>
 
         <template id="sub-right">
+            <div> right </div>
         </template>
 
         <template id="sub-unfound">
+            <div> unfound </div>
         </template>
 
         <template id="sub-others">
+            <div> others:<content/> </div>
         </template>
 
         <main-div>
