@@ -3,18 +3,30 @@
         <script>
 var mainDiv = document.registerElement('main-div');
 var contentDiv = document.registerElement('content-div');
+/* type="I(nit),F(lag),S(afe),D(ead),1,2,3,4..." */
+var protoSquare = Object.create(HTMLElement.prototype,
+    createCallback: {
+        value: function(){
+            this.shadow = this.createShadowRoot();
+            this.shadow.innerHTML = "test";
+        }
+    }
+);
+
+var subSquare = document.registerElement('sub-square');
+
+
         </script>
     </head>
     <body>
 
-        <!--type="I(nit),F(lag),S(afe),D(ead),1,2,3,4..."-->
         <template id="proto">
             <div type=""> lalala </div>
         </template>
 
         <main-div>
             <content-div>
-
+                <sub-square/>
             </content-div>
         </main-div>
 
