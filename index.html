@@ -1,5 +1,7 @@
 <html>
     <head>
+        <link href="http://www.bootcss.com/p/layoutit/css/bootstrap-combined.min.css" rel="stylesheet">
+        <!--<script src="http://www.bootcss.com/p/layoutit/js/bootstrap.min.js"></script>-->
         <script>
 var mainDiv = document.registerElement('main-div');
 var contentDiv = document.registerElement('content-div');
@@ -318,16 +320,45 @@ class MineSweeper {
             </svg></span>
         </template>
 
-        <input id=w placeholder="Width of Map"></input>
-        <input id=h placeholder="Height of Map"></input>
-        <input id=m placeholder="Number of Mine"></input>
-        <button id=b>Start Game</button>
-        <br></br>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h1 class="text-center">
+                        Mine Sweeper
+                    </h1>
+                    <div class="text-center">
+                        <div class="control-group">
+                            <label class="control-label" for="w">Width of Map</label>
+                            <div class="controls">
+                                <input id="w" type="number" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="h">Height of Map</label>
+                            <div class="controls">
+                                <input id="h" type="number" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="m">Number of Mine</label>
+                            <div class="controls">
+                                <input id="m" type="number" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button id="b" class="btn">Start Game</button>
+                            </div>
+                        </div>
+                        <main-div>
+                        <content-div id="contentDiv">
+                        </content-div>
+                        </main-div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <main-div>
-            <content-div id="contentDiv">
-            </content-div>
-        </main-div>
 
         <script>
 document.getElementById("b").onclick = function(){
@@ -338,6 +369,7 @@ document.getElementById("b").onclick = function(){
     if(h=="")h=undefined;
     if(m=="")m=undefined;
     var game = new MineSweeper("game",document.getElementById('contentDiv'),w,h,m,0);
+    return false;
 }
         </script>
     </body>
