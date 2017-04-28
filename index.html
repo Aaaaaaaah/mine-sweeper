@@ -254,75 +254,73 @@ class MineSweeper {
 
     <!-- squareType="I(nit),F(lag),S(afe),D(ead),W(rong),U(nfound),1,2,3,4..." -->
     <template id="sub-init">
-            <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <rect width="40" height="40"
-                    style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
-                <path d="M 10 10 l 0 20" stroke="black" stroke-width='1' fill="rgb(255,250,250)" />
-                <path d="M 10 10 l 20 0" stroke="black" stroke-width='1' fill="rgb(255,250,250)" />
-                <path d="M 30 30 l -20 0" stroke="black" stroke-width='1' fill="rgb(255,250,250)" />
-                <path d="M 30 30 l 0 -20" stroke="black" stroke-width='1' fill="rgb(255,250,250)" />
-            </svg>
+        <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <rect width="40" height="40"
+                style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
+            <path d="M 10 10 l 0 20" stroke="black" stroke-width='1' fill="rgb(255,250,250)" />
+            <path d="M 10 10 l 20 0" stroke="black" stroke-width='1' fill="rgb(255,250,250)" />
+            <path d="M 30 30 l -20 0" stroke="black" stroke-width='1' fill="rgb(255,250,250)" />
+            <path d="M 30 30 l 0 -20" stroke="black" stroke-width='1' fill="rgb(255,250,250)" />
+        </svg>
     </template>
 
     <template id="sub-flag">
-            <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <rect width="40" height="40"
-                    style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
-                <path d="M 18 6 l 10 12 l -10 0" stroke="red" stroke-width='2' fill="red" />
-                <path d="M 18 6 l 0 24" stroke="red" stroke-width='2' fill="red" />
-                <path d="M 10 30 l 20 0" stroke="red" stroke-width='4' fill="red" />
-            </svg>
+        <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <rect width="40" height="40"
+                style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
+            <path d="M 18 6 l 10 12 l -10 0" stroke="red" stroke-width='2' fill="red" />
+            <path d="M 18 6 l 0 24" stroke="red" stroke-width='2' fill="red" />
+            <path d="M 10 30 l 20 0" stroke="red" stroke-width='4' fill="red" />
+        </svg>
     </template>
 
     <template id="sub-safe">
-            <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <rect width="40" height="40"
-                    style="fill:rgb(255,250,250);
-                    stroke-width:1;
-                    stroke:rgb(0,0,0)"/>
-            </svg>
+        <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <rect width="40" height="40"
+                style="fill:rgb(255,250,250);
+                stroke-width:1;
+                stroke:rgb(0,0,0)"/>
+        </svg>
     </template>
 
     <template id="sub-dead">
-            <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <rect width="40" height="40"
-                    style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
-                <circle cx="20" cy="20" r="10" stroke="red"
-                    stroke-width="1" fill="red"/>
-            </svg>
+        <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <rect width="40" height="40"
+                style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
+            <circle cx="20" cy="20" r="10" stroke="red"
+                stroke-width="1" fill="red"/>
+        </svg>
     </template>
 
     <template id="sub-wrong">
-            <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <rect width="40" height="40"
-                    style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
-                <path d="M 18 6 l 10 12 l -10 0 l 0 -12" stroke="red" stroke-width='2' fill=red />
-                <path d="M 18 6 l 0 24" stroke="red" stroke-width='2' fill=red />
-                <path d="M 10 30 l 20 0" stroke="red" stroke-width='4' fill=red />
-                <path d="M 10 10 l 20 20" stroke="black" stroke-width='4' fill=black />
-                <path d="M 10 30 l 20 -20" stroke="black" stroke-width='4' fill=black />
-            </svg>
+        <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <rect width="40" height="40"
+                style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
+            <path d="M 18 6 l 10 12 l -10 0 l 0 -12" stroke="red" stroke-width='2' fill=red />
+            <path d="M 18 6 l 0 24" stroke="red" stroke-width='2' fill=red />
+            <path d="M 10 30 l 20 0" stroke="red" stroke-width='4' fill=red />
+            <path d="M 10 10 l 20 20" stroke="black" stroke-width='4' fill=black />
+            <path d="M 10 30 l 20 -20" stroke="black" stroke-width='4' fill=black />
+        </svg>
     </template>
 
     <template id="sub-unfound">
-            <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <rect width="40" height="40"
-                    style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
-                <circle cx="20" cy="20" r="10" stroke="black"
-                    stroke-width="1" fill="black"/>
-            </svg>
+        <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <rect width="40" height="40"
+                style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
+            <circle cx="20" cy="20" r="10" stroke="black"
+                stroke-width="1" fill="black"/>
+        </svg>
     </template>
 
     <template id="sub-others">
-        <div style="position:absolute">
-            <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <rect width="40" height="40"
-                    style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
-            </svg>
-            <div style="position:absolute;left:11px;top:0px;font-weight:800;font-size:200%">
-                <content>
-                </content>
-            </div>
+        <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <rect width="40" height="40"
+                style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
+        </svg>
+        <div style="position:absolute;left:11px;top:0px;font-weight:800;font-size:200%">
+            <content>
+            </content>
         </div>
     </template>
 
