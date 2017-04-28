@@ -108,6 +108,9 @@ class MineSweeper {
         }
     }
     Handle(i,j,t,type){
+        if(this.time==0){
+            this.start = (new Date()).getTime()
+        }
         this.time++
         if(type=="click"){
             /* left click */
@@ -228,7 +231,9 @@ class MineSweeper {
             }
         }
         this.Handle=()=>{};
-        alert(ans);
+        this.end = (new Date()).getTime();
+        this.timeUsed = this.end - this.start;
+        alert(`${ans}\nTime Used: ${this.timeUsed/1000.} s`);
     }
     /* State Table
      * 0 unsafe new
@@ -373,7 +378,8 @@ class MineSweeper {
                     </content-div>
 
                 </div>
-            </div>
+                <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
+           </div>
         </div>
     </div>
 
