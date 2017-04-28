@@ -53,11 +53,13 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
 });
 
 class MineSweeper {
-    constructor(element){
-        for(var j=0;j<10;j++){
-            for(var i=0;i<10;i++){
+    constructor(element,w=10,h=10){
+        this.w = w;
+        this.h = h;
+        for(var i=0;i<this.h;i++){
+            for(var j=0;j<this.w;j++){
                 var temp = new subSquare();
-                temp.id = `sub-${j}-${i}`;
+                temp.id = `sub-${i}-${j}`;
                 element.appendChild(temp);
             }
             element.appendChild(document.createElement("br"))
