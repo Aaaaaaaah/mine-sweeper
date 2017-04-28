@@ -32,9 +32,6 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
                 case "W":
                     squareType="sub-wrong";
                     break;
-                case "R":
-                    squareType="sub-right";
-                    break;
                 case "U":
                     squareType="sub-unfound";
                     break;
@@ -205,22 +202,44 @@ class MineSweeper {
                     safeNew++;
                 }
                 if(j==5){
-                    return this.Fail();
+                    return this.Ans("You Fail!");
                 }
             }
         }
         if((safeFlagged==0 && unsafeNew==0)||(safeNew==0 && safeFlagged==0)){
-            this.Win();
+            this.Ans("You Win!");
         }
     }
-    Fail(){
+    Ans(ans){
+        for(var i of this.data){
+            for(var j of i){
+                switch(this.data[i][j]){
+                    case(0):
+                        //unsafe new
+                        this.pool[i][j].setAttribute("square-type","U");
+                        break;
+                    case(2):
+                        //safe flagged
+                        this.pool[i][j].setAttribute("square-type","W");
+                        break;
+                    case(5):
+                        //unsafe found
+                        this.pool[i][j].setAttribute("square-type","D");
+                        breakl
+                }
+            }
+        }
         this.Handle=()=>{};
-        alert("Fail");
+        alert(ans);
     }
-    Win(){
-        this.Handle=()=>{};
-        alert("win")
-    }
+    /* State Table
+     * 0 unsafe new
+     * 1 safe new
+     * 2 safe flaged
+     * 3 unsafe flaged
+     * 4 safe found
+     * 5 unsafe found
+     */
 };
 
         </script>
