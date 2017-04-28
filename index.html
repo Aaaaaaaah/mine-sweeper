@@ -4,16 +4,15 @@
 var mainDiv = document.registerElement('main-div');
 var contentDiv = document.registerElement('content-div');
 /* type="I(nit),F(lag),S(afe),D(ead),1,2,3,4..." */
-var protoSquare = Object.create(HTMLElement.prototype, {
-    attachedCallback: {
-        value: function(){
-            this.shadow = this.createShadowRoot();
-            this.shadow.innerHTML = "test";
-        }
-    }
+var subSquare = document.registerElement('sub-square', class extends HTMLElement {
+    //createdCallback() {};
+    attachedCallback() {
+        this.shadow = this.createShadowRoot();
+        this.shadow.innerHTML = "test";
+    };
+    //detachedCallback() {};
+    //attributeChangedCallback(attr, oldVal, newVal) {};
 });
-
-var subSquare = document.registerElement('sub-square', {prototype: protoSquare});
 
 
         </script>
