@@ -61,18 +61,11 @@ class MineSweeper {
         this.w = w;
         this.h = h;
         this.m = m;
-        this.pool = [];
-        this.data = [];
-        for(var i=0;i<this.h;i++){
-            this.data.push([])
-            for(var j=0;j<this.w;j++){
-                this.data[i].push(1)
-            }
-        }
         this.initDom();
         this.initMap();
     }
     initDom(){
+        this.pool = [];
         for(var i=0;i<this.h;i++){
             this.pool.push([]);
             for(var j=0;j<this.w;j++){
@@ -80,8 +73,12 @@ class MineSweeper {
                 temp.id = `${this.name}-${i}-${j}`;
                 temp.i = i;
                 temp.j = j;
-                temp.addEventListener("click",(e,o)=>this.Handle(e,o))
-                    temp.addEventListener("contextmenu",(e,o)=>this.Handle(e,o))
+                var fun = (e,o)=>{
+                    e.preventDefault();
+                    this.Handle(e.target.i,e.target.j,e.target,e.type)
+                }
+                temp.addEventListener("click", fun);
+                temp.addEventListener("contextmenu", fun);
                 this.pool[i].push(temp);
                 this.element.appendChild(temp);
             }
@@ -89,6 +86,14 @@ class MineSweeper {
         }
     }
     initMap(){
+        this.time = 0;
+        this.data = [];
+        for(var i=0;i<this.h;i++){
+            this.data.push([])
+            for(var j=0;j<this.w;j++){
+                this.data[i].push(1)
+            }
+        }
         for(var n=0;n<this.m;n++){
             var h=Math.floor(Math.random() * this.h)
             var w=Math.floor(Math.random() * this.w);
@@ -99,18 +104,20 @@ class MineSweeper {
             this.data[h][w]=0;
         }
     }
-    Handle(e,o){
-        e.preventDefault();
-        var i = e.target.i;
-        var j = e.target.j;
-        var t = e.target;
-        if(e.type=="click"){
+    Handle(i,j,t,type){
+        this.time++
+        if(type=="click"){
             /* left click */
             switch(this.data[i][j]){
                 case(0):
                     //going to die
                     if(!this.debug){
-                        this.data[i][j]=5;
+                        if(this.time==1){
+                            this.initMap();
+                            return this.Handle(i,j,t,type);
+                        }else{
+                            this.data[i][j]=5;
+                        }
                     }
                     t.setAttribute("square-type","D")
                     break;
@@ -387,6 +394,7 @@ class MineSweeper {
 
 
     <script>
+var game
 document.getElementById("b").onclick = function(){
     var w = document.getElementById("w").value;
     var h = document.getElementById("h").value;
@@ -395,7 +403,7 @@ document.getElementById("b").onclick = function(){
     if(w=="")w=undefined;
     if(h=="")h=undefined;
     if(m=="")m=undefined;
-    var game = new MineSweeper("game",document.getElementById('contentDiv'),w,h,m,d);
+    game = new MineSweeper("game",document.getElementById('contentDiv'),w,h,m,d);
     return false;
 }
 
