@@ -83,7 +83,7 @@ class MineSweeper {
                 temp.j = j;
                 temp.style.position="absolute";
                 temp.style.top=i*40;
-                temp.style.left=j*40;
+                temp.style.left=j*40-this.w*20;
                 var fun = (e,o)=>{
                     e.preventDefault();
                     this.Handle(e.target.i,e.target.j,e.target,e.type)
@@ -318,7 +318,7 @@ class MineSweeper {
             <rect width="40" height="40"
                 style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
         </svg>
-        <div style="position:absolute;left:11px;top:0px;font-weight:800;font-size:200%">
+        <div style="position:absolute;left:11px;top:9px;font-weight:800;font-size:200%">
             <content>
             </content>
         </div>
