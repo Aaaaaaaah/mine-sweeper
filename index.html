@@ -211,8 +211,8 @@ class MineSweeper {
         }
     }
     Ans(ans){
-        for(var i of this.data){
-            for(var j of i){
+        for(var i=0;i<this.h;i++){
+            for(var j=0;j<this.w;j++){
                 switch(this.data[i][j]){
                     case(0):
                         //unsafe new
@@ -225,7 +225,7 @@ class MineSweeper {
                     case(5):
                         //unsafe found
                         this.pool[i][j].setAttribute("square-type","D");
-                        breakl
+                        break;
                 }
             }
         }
