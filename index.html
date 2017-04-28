@@ -261,10 +261,13 @@ class MineSweeper {
 
         <template id="sub-wrong">
             <span><svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                   <rect width="20" height="20"
-                       style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
-                   <text x="5" y="15" fill:"black">5</text>
-                   </svg></span>
+            <rect width="20" height="20"
+              style="fill:none;stroke-width:1;stroke:rgb(0,0,0)"/>
+            <path d="M 10 3 l 5 3 l -5 3" stroke="black" stroke-width='1' fill:none />
+            <path d="M 10 3 l 0 12" stroke="black" stroke-width='1' fill:none />
+            <path d="M 6 15 l 8 0" stroke="black" stroke-width='2' fill:none />
+            <text x="5" y="15" fill="red">x</text>
+        </svg></span>
         </template>
 
         <template id="sub-unfound">
