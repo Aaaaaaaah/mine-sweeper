@@ -323,8 +323,8 @@ class MineSweeper {
         </span>
     </template>
 
-    <div class="container-fluid">
-        <div class="row-fluid">
+    <div class="container">
+        <div class="row">
             <div class="span12">
                 <h1 class="text-center">
                     Mine Sweeper
@@ -348,12 +348,26 @@ class MineSweeper {
                             <input id="m" type="number" />
                         </div>
                     </div>
+
+                    <div class="row checkbox-row">
+                        <div class="col-sm-6">
+                            <div class="checkbox-inline">
+                                <label class="checkbox-inline"><input id="d" type="checkbox" value="">Debug Mode</label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="control-group">
                         <div class="controls">
                             <button id="b" class="btn">Start Game</button>
                         </div>
                     </div>
-                    <hr></hr>
+
+                </div>
+
+                <hr></hr>
+
+                <div class="text-center">
 
                     <content-div id="contentDiv">
                     </content-div>
@@ -369,10 +383,11 @@ document.getElementById("b").onclick = function(){
     var w = document.getElementById("w").value;
     var h = document.getElementById("h").value;
     var m = document.getElementById("m").value;
+    var d = document.getElementById("d").checked;
     if(w=="")w=undefined;
     if(h=="")h=undefined;
     if(m=="")m=undefined;
-    var game = new MineSweeper("game",document.getElementById('contentDiv'),w,h,m,0);
+    var game = new MineSweeper("game",document.getElementById('contentDiv'),w,h,m,d);
     return false;
 }
 
