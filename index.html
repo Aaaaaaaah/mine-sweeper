@@ -114,6 +114,8 @@ class MineSweeper {
             switch(this.data[i][j]){
                 case(0):
                     //going to die
+                    this.data[i][j]=5;
+                    t.setAttribute("square-type","D")
                     break;
                 case(1):
                     //open it
@@ -136,12 +138,12 @@ class MineSweeper {
                 case(2):
                     //cancel flag
                     this.data[i][j]=1;
-                    t.setAttribuite("square-type","I");
+                    t.setAttribute("square-type","I");
                     break;
                 case(3):
                     //cancel flag
                     this.data[i][j]=0;
-                    t.setAttribuite("square-type","I");
+                    t.setAttribute("square-type","I");
                     break;
             }
         }
