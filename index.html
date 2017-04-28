@@ -191,20 +191,26 @@ class MineSweeper {
     CheckWinOrFail(){
         var safeFlagged = 0;
         var unsafeNew = 0;
+        var safeNew = 0;
         for(var i of this.data){
-            for(var j of this.data){
+            for(var j of i){
                 if(j==2){
                     safeFlagged++;
                 }
                 if(j==0){
                     unsafeNew++;
                 }
+                if(j==1){
+                    safeNew++;
+                }
                 if(j==5){
                     return this.Fail();
                 }
             }
         }
-        if(!safeFlagged && !unsafeNew)this.Win();
+        if((safeFlagged==0 && unsafeNew==0)||(safeNew==0 && safeFlagged==0)){
+            this.Win();
+        }
     }
     Fail(){
         this.Handle=()=>{};
