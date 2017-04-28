@@ -40,17 +40,19 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
                     break;
                 default:
                     squareType="sub-others";
-           };
-           this.shadow.appendChild(
-               document.importNode(
-                   document.getElementById(squareType).content,
-                   true
-               )
-           );
+            };
+            this.shadow.appendChild(
+                document.importNode(
+                    document.getElementById(squareType).content,
+                    true
+                )
+            );
 
         };
     };
 });
+
+
 
         </script>
     </head>
@@ -58,11 +60,11 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
 
         <!-- squareType="I(nit),F(lag),S(afe),D(ead),W(rong),R(ight),U(nfound),1,2,3,4..." -->
         <template id="sub-init">
-            <div> init </div>
+            <span> init </span>
         </template>
 
         <template id="sub-flag">
-            <div> flag </div>
+            <span> flag </span>
         </template>
 
         <template id="sub-safe">
@@ -91,7 +93,14 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
 
         <main-div>
             <content-div>
-                <sub-square/>
+                <script>
+for(var j=0;j<10;j++){
+    for(var i=0;i<10;i++){
+        document.write(`<sub-square id='sub-${j}-${i}'></sub-square>`);
+    }
+    document.write("<br></br>")
+}
+                </script>
             </content-div>
         </main-div>
 
