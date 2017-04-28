@@ -106,6 +106,7 @@ class MineSweeper {
      * 5 unsafe found
      */
     Handle(e,o){
+        e.preventDefault();
         var i = e.target.i;
         var j = e.target.j;
         var t = e.target;
@@ -150,7 +151,6 @@ class MineSweeper {
             }
         }
         this.CheckWinOrFail();
-        e.preventDefault();
     }
     /* State Table
      * 0 unsafe new
@@ -207,9 +207,11 @@ class MineSweeper {
         if(!safeFlagged && !unsafeNew)Win();
     }
     Fail(){
-        alert("Fail")
+        this.Handle=()=>{};
+        alert("Fail");
     }
     Win(){
+        this.Handle=()=>{};
         alert("win")
     }
 };
