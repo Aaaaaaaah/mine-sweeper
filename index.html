@@ -233,7 +233,7 @@ class MineSweeper {
         this.Handle=()=>{};
         this.end = (new Date()).getTime();
         this.timeUsed = this.end - this.start;
-        alert(`${ans}\nTime Used: ${this.timeUsed/1000.} s`);
+        setTimeout(()=>alert(`${ans}\nTime Used: ${this.timeUsed/1000.} s`),1);
     }
     /* State Table
      * 0 unsafe new
