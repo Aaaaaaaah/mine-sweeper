@@ -36,6 +36,9 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
                 case "U":
                     squareType="#sub-unfound";
                     break;
+                case "B":
+                    squareType="#sub-bad";
+                    break;
                 default:
                     squareType="#sub-others";
             };
@@ -59,6 +62,7 @@ class MineSweeper {
         m=Math.sqrt(w*h),
         checkDebug=()=>{return 0},
         checkEnhance=()=>{return 0},
+        digBtn,
         templates=document.getElementById("templates")
     ){
         element.innerHTML = "";
@@ -74,6 +78,9 @@ class MineSweeper {
         this.hasAns = false;
         this.initDom();
         this.initMap();
+        if(digBtn!=undefined){
+            digBtn.addEventListener("click",()=>{this.DigAll();});
+        }
     }
     initDom(){
         this.pool = [];
@@ -97,9 +104,9 @@ class MineSweeper {
                     this.Handle(e.target.i,e.target.j,e.target,e.type);
                     this.CheckWinOrFail();
                     if(this.checkEnhance() && !this.hasAns){
-                        this.Enhance()
+                        this.Enhance();
+                        this.CheckWinOrFail();
                     }
-                    this.CheckWinOrFail();
                 }
                 temp.addEventListener("click", fun);
                 temp.addEventListener("contextmenu", fun);
@@ -137,6 +144,47 @@ class MineSweeper {
                 }
             }
         }
+    }
+    DigAll(){
+        for(var i=0;i<this.h;i++){
+            for(var j=0;j<this.w;j++){
+                if(this.data[i][j]==2){
+                    alert("Digging Error");
+                    return;
+                }
+            }
+        }
+
+        for(var i=0;i<this.h;i++){
+            for(var j=0;j<this.w;j++){
+                if(this.data[i][j]==3){
+                    this.data[i][j]=6;
+                    this.pool[i][j].setAttribute("square-type","B");
+                    this.CheckNeighbor(
+                        i,
+                        j,
+                        (data)=>{return data==4},
+                        (a,b,c,d)=>{
+                            var temp = this.pool[c][d].getAttribute("square-type");
+                            if(temp=="S"){
+                                temp=0;
+                            }else{
+                                temp=parseInt(temp);
+                            }
+                            temp = temp - 1;
+                            if(temp==0){
+                                temp="S";
+                            }else{
+                                temp=temp.toString();
+                            }
+                            this.pool[c][d].setAttribute("square-type",temp);
+                        }
+                    );
+                    this.Handle(i,j,undefined,"click");
+                }
+            }
+        }
+
     }
     Handle(i,j,t=this.pool[i][j],type){
         if(this.time==0){
@@ -208,25 +256,40 @@ class MineSweeper {
     }
     DoubleClick(i,j){
         var count = 0;
-        this.CheckNeighbor(i,j,(d)=>{return (d==2||d==3)},(a,b,c,d)=>{count++});
+        this.CheckNeighbor(i,j,(data)=>{return (data==2||data==3)},(a,b,c,d)=>{count++});
         if(count>=this.pool[i][j].getAttribute("square-type")-0){
-            this.CheckNeighbor(i,j,(d)=>{return (d==0||d==1)},(a,b,c,d)=>{this.Handle(c,d,undefined,"click")});
+            this.CheckNeighbor(
+                i,
+                j,
+                (data)=>{return (data==0||data==1)},
+                (a,b,c,d)=>{this.Handle(c,d,undefined,"click")}
+            );
         }
         var count = 0;
-        this.CheckNeighbor(i,j,(d)=>{return (d==0||d==1||d==2||d==3)},(a,b,c,d)=>{count++});
+        this.CheckNeighbor(
+            i,
+            j,
+            (data)=>{return (data==0||data==1||data==2||data==3)},
+            (a,b,c,d)=>{count++}
+        );
         if(count<=this.pool[i][j].getAttribute("square-type")-0){
-            this.CheckNeighbor(i,j,(d)=>{return (d==0||d==1)},(a,b,c,d)=>{this.Handle(c,d,undefined,"contextmenu")});
+            this.CheckNeighbor(
+                i,
+                j,
+                (data)=>{return (data==0||data==1)},
+                (a,b,c,d)=>{this.Handle(c,d,undefined,"contextmenu")}
+            );
         }
     }
     Flood(i,j){
         if(this.data[i][j]==2)return;
         this.data[i][j] = 4;
         var count = 0;
-        this.CheckNeighbor(i,j,(d)=>{return (d==0||d==3)},(a,b,c,d)=>{count++});
+        this.CheckNeighbor(i,j,(data)=>{return (data==0||data==3)},(a,b,c,d)=>{count++});
 
         if(count == 0){
             this.pool[i][j].setAttribute("square-type","S");
-            this.CheckNeighbor(i,j,(d)=>{return (d==1)},(a,b,c,d)=>{this.Flood(c,d)});
+            this.CheckNeighbor(i,j,(data)=>{return (data==1)},(a,b,c,d)=>{this.Flood(c,d)});
         }else{
             this.pool[i][j].setAttribute("square-type",count);
         }
@@ -280,16 +343,18 @@ class MineSweeper {
             }
         }
         this.Handle=()=>{};
+        this.DigAll=()=>{};
         this.end = (new Date()).getTime();
         this.timeUsed = this.end - this.start;
     }
     /* State Table
-     * 0 unsafe new
-     * 1 safe new
-     * 2 safe flaged
-     * 3 unsafe flaged
-     * 4 safe found
-     * 5 unsafe found
+     * 0 unsafe new     I U
+     * 1 safe new       I
+     * 2 safe flaged    F W
+     * 3 unsafe flaged  F
+     * 4 safe found     S 1 2 3 ...
+     * 5 unsafe found   D
+     * 6 safe bad       B
      */
 };
 
@@ -308,7 +373,9 @@ onload = function(){
             h,
             m,
             ()=>{return document.getElementById("d").checked;},
-            ()=>{return document.getElementById("e").checked;}
+            ()=>{return document.getElementById("e").checked;},
+            document.getElementById("digIt"),
+            document.getElementById("templates")
         );
         return false;
     }
@@ -397,6 +464,16 @@ onload = function(){
                 </content>
             </div>
         </template>
+        
+        <template id="sub-bad">
+            <svg width="40px" height="40px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                <rect width="40" height="40"
+                    style="fill:rgb(0,0,0);
+                    stroke-width:1;
+                    stroke:rgb(0,0,0)"/>
+            </svg>
+        </template>
+
     </div>
 
     <div class="container-fluid">
@@ -449,6 +526,12 @@ onload = function(){
                     <div class="control-group">
                         <div class="controls">
                             <button id="b" class="btn">Start Game</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button id="digIt" class="btn">Dig it</button>
                         </div>
                     </div>
 
