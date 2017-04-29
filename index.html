@@ -165,22 +165,10 @@ class MineSweeper {
                         j,
                         (data)=>{return data==4},
                         (a,b,c,d)=>{
-                            var temp = this.pool[c][d].getAttribute("square-type");
-                            if(temp=="S"){
-                                temp=0;
-                            }else{
-                                temp=parseInt(temp);
-                            }
-                            temp = temp - 1;
-                            if(temp==0){
-                                temp="S";
-                            }else{
-                                temp=temp.toString();
-                            }
-                            this.pool[c][d].setAttribute("square-type",temp);
+                            this.data[c][d] = 1;
+                            this.Handle(c,d,undefined,"click");
                         }
                     );
-                    this.Handle(i,j,undefined,"click");
                 }
             }
         }
@@ -255,9 +243,15 @@ class MineSweeper {
 
     }
     DoubleClick(i,j){
+        var expect = this.pool[i][j].getAttribute("square-type");
+        if(expect=="S"){
+            expect=0;
+        }else{
+            expect=parseInt(expect);
+        }
         var count = 0;
         this.CheckNeighbor(i,j,(data)=>{return (data==2||data==3)},(a,b,c,d)=>{count++});
-        if(count>=this.pool[i][j].getAttribute("square-type")-0){
+        if(count>=expect){
             this.CheckNeighbor(
                 i,
                 j,
@@ -272,7 +266,7 @@ class MineSweeper {
             (data)=>{return (data==0||data==1||data==2||data==3)},
             (a,b,c,d)=>{count++}
         );
-        if(count<=this.pool[i][j].getAttribute("square-type")-0){
+        if(count<=expect){
             this.CheckNeighbor(
                 i,
                 j,
@@ -506,7 +500,7 @@ onload = function(){
                         <div class="col-sm-6">
                             <div class="checkbox-inline">
                                 <label class="checkbox-inline">
-                                    <input id="d" type="checkbox">
+                                    <input id="d" type="checkbox" checked="true">
                                     Debug Mode
                                 </label>
                             </div>
