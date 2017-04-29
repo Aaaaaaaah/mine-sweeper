@@ -12,7 +12,6 @@ var subSquare = document.registerElement('sub-square', class extends HTMLElement
         this.shadow = this.createShadowRoot();
         this.setAttribute("square-type","I");
     };
-    //detachedCallback() {};
     attributeChangedCallback(attr, oldVal, newVal) {
         if(attr=="square-type"){
             this.shadow.innerHTML = "";
