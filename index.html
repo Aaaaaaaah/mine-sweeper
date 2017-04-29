@@ -206,6 +206,9 @@ class MineSweeper {
             this.data[i][j] = 4;
             this.pool[i][j].setAttribute("square-type",count);
         }
+        if(this.debug){
+            this.DoubleClick(i,j);
+        }
     }
     CheckWinOrFail(){
         var safeFlagged = 0;
