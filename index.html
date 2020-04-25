@@ -5,9 +5,9 @@
 
         <script>
 
-var contentDiv = document.registerElement('content-div');
+var contentDiv = customElements.define('content-div');
 
-var subSquare = document.registerElement('sub-square', class extends HTMLElement {
+var subSquare = customElements.define('sub-square', class extends HTMLElement {
     attachedCallback() {
         this.shadow = this.createShadowRoot();
         this.setAttribute("square-type","I");
